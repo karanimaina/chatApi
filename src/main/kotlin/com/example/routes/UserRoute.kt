@@ -9,6 +9,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.userRoute() {
+    route("/user"){
     get{
         if (userStorage.isNotEmpty()) {
             call.respond(userStorage)
@@ -16,9 +17,9 @@ fun Route.userRoute() {
             call.respondText("No users found", status = HttpStatusCode.OK)
         }
     }
-    get("{id}"){
-  val id  = call.parameters["id"]?:return@get call.respondText ("missing id ", status = HttpStatusCode.OK )
-        val user = userStorage.find { it.id== id }?: return@get call.respondText("No users with the given Id", status = HttpStatusCode.NotFound)
+    get("{id?}"){
+        val id  = call.parameters["id"]?:return@get call.respondText ("missing id ", status = HttpStatusCode.BadRequest )
+        val user = userStorage.find { it.id== id }  ?: return@get call.respondText("No users with the given Id", status = HttpStatusCode.NotFound)
         call.respond(user)
 
     }
@@ -26,14 +27,14 @@ fun Route.userRoute() {
     post {
     val user  = call.receive<User>()
         userStorage.add(user)
-        call.respondText("User stored success fully", status = HttpStatusCode.Created)
+        call.respondText("User stored successfully", status = HttpStatusCode.Created)
     }
     delete("{id?}") {
-     val id = call.parameters["id"]?:call.respond(HttpStatusCode.BadRequest)
+     val id = call.parameters["id"]?:return@delete call.respond(HttpStatusCode.BadRequest)
         if (userStorage.removeIf{it.id==id }){
-            call.respondText  ("user removed successfully")
+            call.respondText  ("user removed successfully",status= HttpStatusCode.Accepted)
         }else {
             call.respondText  ("user Not found" , status = HttpStatusCode.NotFound)
         }
 }
-}
+}}

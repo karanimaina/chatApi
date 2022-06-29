@@ -1,0 +1,58 @@
+POST http://127.0.0.1:8081/user
+Content-Type: application/json
+
+{
+
+}
+
+
+
+###
+POST http://127.0.0.1:8081/user
+Content-Type: application/json
+
+{
+  "id": "201",
+  "firstName": "John",
+  "lastName": "Smith",
+  "profession": "Developer",
+  "age": "30",
+  "marital": "single",
+  "hobby":"swimming",
+  "email": "john.smith@company.com"
+}
+
+###
+POST http://127.0.0.1:8081/user
+Content-Type: application/json
+
+{
+  "id": "202",
+  "first": "John",
+  "last": "Smith",
+  "profession": "Developer",
+  "age": "30",
+  "marital": "married",
+  "hobby":"dancing",
+  "email": "john.smith@company.com"
+}
+
+
+
+###
+GET http://127.0.0.1:8081/user
+Accept: application/json
+
+###
+GET http://127.0.0.1:8081/user/200
+Accept: application/json
+
+###
+GET http://127.0.0.1:8081/user/201
+Accept: application/json
+
+###
+DELETE http://127.0.0.1:8081/user/100
+
+###
+DELETE http://127.0.0.1:8081/user/201
