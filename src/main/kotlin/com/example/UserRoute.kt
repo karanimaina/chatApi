@@ -7,4 +7,10 @@ fun Route.userRoute() {
     get("{id}"){
 
     }
+    post {
+
+    }
+    delete("{id?}") {
+
+    }
 }
