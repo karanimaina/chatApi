@@ -1,5 +1,6 @@
 package com.example.plugins
 
+import com.example.userRoute
 import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -9,6 +10,7 @@ import io.ktor.server.request.*
 fun Application.configureRouting() {
 
     routing {
+        userRoute()
 
     }
 }
